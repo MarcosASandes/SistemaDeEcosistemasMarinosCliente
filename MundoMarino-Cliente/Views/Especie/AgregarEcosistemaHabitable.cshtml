@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MundoMarino_Cliente.Models.EcosistemaModel>
+
+@{
+	ViewData["Title"] = "AgregarEcosistemaHabitable";
+}
+
+<h1>AgregarEcosistemaHabitable</h1>
+
+@if (ViewBag.Msg != null)
+{
+	<div class="alert alert-danger">
+		@ViewBag.Msg
+	</div>
+}
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+
+@if (Model != null)
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.id)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.nombre)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.descripcion)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.idEstado)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.codigoAlpha)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.nivelConservacion)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.id)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.nombre)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.descripcion)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.idEstado)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.codigoAlpha)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.nivelConservacion)
+					</td>
+					<td>
+						@Html.ActionLink("Details", "Details", "Ecosistema", new {  id=item.id }) |
+
+						<form method="post">
+							<input value="@ViewBag.idEspecie" name="idEspecie" hidden />
+							<input value="@item.id" name="idEcosistema" hidden />
+
+							<input type="submit" value="Agregar" class="btn btn-primary" />
+						</form>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

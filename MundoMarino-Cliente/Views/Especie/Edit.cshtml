@@ -1,0 +1,45 @@
+﻿@model MundoMarino_Cliente.Models.EspecieModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Especie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div>
+                <label>Nombre científico: </label>
+                <input type="text" class="form-control" name="nameCientifico" />
+            </div>
+
+            <div>
+                <label>Nombre casual: </label>
+                <input type="text" class="form-control" name="nameCasual" />
+            </div>
+
+            <div>
+                <label>Descripción: </label>
+                <input type="text" class="form-control" name="nameDesc" />
+            </div>
+
+            <input value="@ViewBag.IdEsp" name="idEspecie" hidden />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

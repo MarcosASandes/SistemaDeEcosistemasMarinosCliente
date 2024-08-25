@@ -1,0 +1,121 @@
+﻿@model IEnumerable<EspecieModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if (TempData["tempMsg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["tempMsg"]
+    </div>
+}
+
+<h2>Filtros</h2>
+@Html.ActionLink("Por nombre", "MostrarEspeciesPorNombre", "Especie") <span>|</span>
+@Html.ActionLink("Por rango de peso", "MostrarEspeciesPorPeso", "Especie") <span>|</span>
+@Html.ActionLink("Por peso y nombre", "MostrarEspeciesPorPesoYNombre", "Especie") <span>|</span>
+@Html.ActionLink("En peligro", "MostrarEspeciesEnPeligro", "Especie") <span>|</span>
+@Html.ActionLink("Mostrar especies de un ecosistema", "ListarEspeciesDeUnEco", "Especie") <span>|</span>
+<hr />
+
+
+@if (Context.Session.GetInt32("LogueadoId") != null)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    @Html.ActionLink("Editar tope nombre", "Edit", "Configuracion", new { nombreAtributo = "EspecieNombre" }) <span>|</span>
+    @Html.ActionLink("Editar tope descripción", "Edit", "Configuracion", new { nombreAtributo = "EspecieDescripcion" })
+}
+
+@if (Model != null)
+{
+    @if (Model.Count() > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreCientifico)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nivelConservacion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.peso)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.longitud)
+                    </th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreCientifico)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.estado.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nivelConservacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.peso)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.longitud)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                            @Html.ActionLink("Ver amenazas", "MostrarAmenazas", new { id=item.id }) |
+                            @Html.ActionLink("Ver ecosistemas", "MostrarEcosistemasDeEspecie", new { id=item.id }) |
+                            @Html.ActionLink("Ver ecosistemas habitables", "MostrarEcosistemasHabitables", new { id=item.id }) |
+                            @Html.ActionLink("Ver ecosistemas inadecuados", "MostrarEcosistemasInadecuados", new { id=item.id }) |
+
+                            @if (Context.Session.GetInt32("LogueadoId") != null)
+                            {
+                                @Html.ActionLink("Edit", "Edit", new {  id=item.id }) <span>|</span>
+                                @*@Html.ActionLink("Asociar amenaza", "AsociarAmenazas", new { id=item.id }) <span>|</span>*@
+                                @Html.ActionLink("Agregar ecosistema habitable", "AgregarEcosistemaHabitable", new { id=item.id })
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>No se encontraron especies</h2>
+    }
+}

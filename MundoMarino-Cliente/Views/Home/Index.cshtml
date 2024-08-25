@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (TempData["msg"] != null)
+{
+    <h2>@TempData["msg"]</h2>
+}
+
+@if (TempData["msgHome"] != null)
+{
+    <h2>@TempData["msgHome"]</h2>
+}
+
+@if (Context.Session.GetInt32("LogueadoId") == null)
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+}

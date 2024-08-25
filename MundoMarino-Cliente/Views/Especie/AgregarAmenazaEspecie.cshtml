@@ -1,0 +1,22 @@
+﻿@model IEnumerable<MundoMarino_Cliente.Models.AmenazaModel>
+
+@{
+    ViewData["Title"] = "AgregarAmenazaEspecie";
+}
+
+<h1>AgregarAmenazaEspecie</h1>
+
+
+@using (Html.BeginForm("AgregarAmenazaEspecie", "Especie", FormMethod.Post))
+{
+    <input value="@ViewBag.idEspecie" name="idEspecie" hidden />
+    @foreach (var amenaza in Model)
+    {
+        <div>
+            <input type="checkbox" name="amenazasElegidas" value="@amenaza.id" />
+            <label>@amenaza.descripcion</label>
+        </div>
+    }
+
+    <button type="submit">Agregar Amenazas a la especie</button>
+}

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MundoMarino_Cliente.Models.AmenazaModel>
+
+@{
+    ViewData["Title"] = "MostrarAmenazas";
+}
+
+<h1>MostrarAmenazas</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@if (Model != null)
+{
+    @if (Model.Count() == 0)
+    {
+        <h2>No se encontraron amenazas.</h2>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.gradoPeligro)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gradoPeligro)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+}
+else
+{
+    <h2>No se encontraron amenazas.</h2>
+}
+
